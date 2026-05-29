@@ -131,6 +131,7 @@ class SchemeAPI:
         params: dict[str, str] = {},
         headers: dict[str, str] = {},
         cookies: dict[str, Any] = {},
+        timeout: float | None = None,
     ):
         """
         Send an HTTP request and validate the JSON response.
@@ -156,6 +157,7 @@ class SchemeAPI:
             params=params,
             headers=headers,
             cookies=cookies,
+            timeout=timeout,
         )
         return TypeAdapter(type).validate_python(response.json())
 
@@ -166,6 +168,7 @@ class SchemeAPI:
         params: dict[str, str] = {},
         headers: dict[str, str] = {},
         cookies: dict[str, Any] = {},
+        timeout: float | None = None,
     ):
         """
         Perform a GET request with response validation.
@@ -180,14 +183,7 @@ class SchemeAPI:
         Returns:
             Parsed and validated response object based on `type`.
         """
-        return self.request(
-            "GET",
-            path,
-            type,
-            params,
-            headers,
-            cookies,
-        )
+        return self.request("GET", path, type, params, headers, cookies, timout)
 
     def post(
         self,
@@ -196,6 +192,7 @@ class SchemeAPI:
         params: dict[str, str] = {},
         headers: dict[str, str] = {},
         cookies: dict[str, Any] = {},
+        timeout: float | None = None,
     ):
         """
         Perform a POST request with response validation.
@@ -217,4 +214,5 @@ class SchemeAPI:
             params,
             headers,
             cookies,
+            timeout,
         )

@@ -1,6 +1,6 @@
 [project]
 name = "scheme_api"
-version = "0.1.2"
+version = "0.1.3"
 description = "A lightweight, typed HTTP API client built on top of `requests` with optional request decorators and Pydantic-based response validation."
 readme = "README.md"
 requires-python = ">=3.12"
