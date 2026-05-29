@@ -16,7 +16,7 @@ A lightweight, typed HTTP API client built on top of `requests` with optional re
 ## Installation
 
 ```bash
-uv add git+https://github.com/<your-username>/<your-repo>.git
+uv add git+https://github.com/KeanuBHillman/SchemeAPI
 ```
 
 ---
