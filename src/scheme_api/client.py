@@ -75,6 +75,7 @@ class SchemeAPI:
             method: str,
             url: str,
             *,
+            data: dict[str, str] = {},
             params: dict[str, str] = {},
             headers: dict[str, str] = {},
             cookies: dict[str, Any] = {},
@@ -105,6 +106,7 @@ class SchemeAPI:
             response = requests.request(
                 method,
                 url,
+                data=data,
                 params=self.params | params,
                 headers=self.headers | headers,
                 cookies=self.cookies | cookies,
@@ -128,6 +130,7 @@ class SchemeAPI:
         method: str,
         path: str,
         type: Any,
+        data: dict[str, str] = {},
         params: dict[str, str] = {},
         headers: dict[str, str] = {},
         cookies: dict[str, Any] = {},
@@ -154,6 +157,7 @@ class SchemeAPI:
         response = self._request(
             method,
             self.base_url + path,
+            data=data,
             params=params,
             headers=headers,
             cookies=cookies,
@@ -183,12 +187,21 @@ class SchemeAPI:
         Returns:
             Parsed and validated response object based on `type`.
         """
-        return self.request("GET", path, type, params, headers, cookies, timout)
+        return self._request(
+            "GET",
+            self.base_url + path,
+            type,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+        )
 
     def post(
         self,
         path: str,
         type: Any,
+        data: dict[str, str] = {},
         params: dict[str, str] = {},
         headers: dict[str, str] = {},
         cookies: dict[str, Any] = {},
@@ -207,12 +220,13 @@ class SchemeAPI:
         Returns:
             Parsed and validated response object based on `type`.
         """
-        return self.request(
+        return self._request(
             "POST",
-            path,
+            self.base_url + path,
             type,
-            params,
-            headers,
-            cookies,
-            timeout,
+            data=data,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
         )
